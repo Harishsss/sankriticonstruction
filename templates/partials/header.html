@@ -1,0 +1,47 @@
+{% load static %}
+
+<div class="container-fluid nav-bar bg-transparent">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+        <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+            <div class="icon p-2 me-2">
+                <img class="img-fluid" src="{% static 'images/png.png' %}" alt="Icon" style="width: 30px; height: 30px;">
+            </div>
+            <h1 class="m-0 text-primary">Sanskriti</h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto">
+                {% for i in menus %}
+                {% if not i.get_sub_menus.count > 0 %}
+
+                <a href="/{{i.app_link}}" class="nav-item nav-link {% if request.resolver_match.url_name == i.slug %}active{% endif%}">{{i.name}}</a>
+                {% comment %} <a href="about.html" class="nav-item nav-link">About</a> {% endcomment %}
+                {% else %}
+                <div class="nav-item dropdown">
+                    <a href="/{{i.app_link}}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{i.name}}</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        {% for submenus in i.get_sub_menus %}
+
+                            <a href="/{{i.app_link}}" class="dropdown-item">{{i.name}}</a>
+                            {% comment %} <a href="property-type.html" class="dropdown-item">Property Type</a>
+                        <a href="property-agent.html" class="dropdown-item">Property Agent</a> {% endcomment %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% comment %} <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="404.html" class="dropdown-item">404 Error</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-item nav-link">Contact</a> {% endcomment %}
+                {% endif %}
+                {% endfor %}
+            </div>
+            <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+        </div>
+    </nav>
+</div>
