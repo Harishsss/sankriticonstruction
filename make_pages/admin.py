@@ -12,3 +12,38 @@ class MenusAdmin(ImportExportModelAdmin):
     search_fields = ['id','name']
     # list_per_page = 15
     list_filter = ['parent__name']
+
+
+@admin.register(Heading)
+class HeadingAdmin(ImportExportModelAdmin):
+    list_display = ['id','name','slug','parent','paragraph','button','btn_link','icon','order',
+                    'server_modified_on', 'status']
+    fields = ['name','slug','parent','paragraph','image','button','btn_link','icon', 'order', 'status']
+    search_fields = ['id','name']
+    # list_per_page = 15
+    list_filter = ['parent__name']
+
+@admin.register(ImagePage)
+class ImagePageAdmin(ImportExportModelAdmin):
+    list_display = ['id','name','parent','image','order',
+                    'server_modified_on', 'status']
+    fields = ['name','parent','image', 'order', 'status']
+    search_fields = ['id','name']
+    # list_per_page = 15
+    list_filter = ['parent__name']
+
+
+
+@admin.register(ContactUs)
+class ContactUsAdmin(ImportExportModelAdmin):
+    list_display = ['id','name','gmail','subject','phone','message',
+                    'server_modified_on', 'status']
+    fields = ['name','gmail','subject', 'phone','message','status']
+    search_fields = ['id','name']
+    # list_per_page = 15
+
+@admin.register(Project)
+class ProjectAdmin(ImportExportModelAdmin):
+    list_display = ['name','constructions_name','rating','price_of_constructions','bed','sqft','bath','image','address','order','server_modified_on', 'status']
+    fields = ['name','constructions_name','rating','price_of_constructions','bed','sqft','bath','image','address','order', 'status']
+    search_fields = ['name']

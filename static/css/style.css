@@ -65,13 +65,26 @@
     font-weight: normal;
     border-radius: 50px;
 }
-
-
+.close-header{
+    position: relative;
+    z-index: 9999!important;
+    padding: 10px;
+}
+.side-line {
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(255, 255, 255, .1);
+}
+.side-line:last-child{
+    margin-right: 0;
+    padding-right: 0;
+    border-right: none;
+}
 /*** Navbar ***/
 .nav-bar {
     position: relative;
-    margin-top: 45px;
-    padding: 0 3rem;
+    /* margin-top: 45px; */
+    padding: 0;
     transition: .5s;
     z-index: 9999;
 }
@@ -371,7 +384,7 @@
 
 
 /*** Footer ***/
-.footer .btn.btn-social {
+.btn-social {
     margin-right: 5px;
     width: 35px;
     height: 35px;
@@ -384,12 +397,12 @@
     transition: .3s;
 }
 
-.footer .btn.btn-social:hover {
+.btn-social:hover {
     color: var(--primary);
     border-color: var(--light);
 }
 
-.footer .btn.btn-link {
+.btn-link {
     display: block;
     margin-bottom: 5px;
     padding: 0;
@@ -400,7 +413,7 @@
     transition: .3s;
 }
 
-.footer .btn.btn-link::before {
+.btn-link::before {
     position: relative;
     content: "\f105";
     font-family: "Font Awesome 5 Free";

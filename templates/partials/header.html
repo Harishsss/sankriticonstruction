@@ -1,5 +1,28 @@
 {% load static %}
-
+<div class="container-fluid bg-dark text-white-50 close-header  ">
+    <div class="container p-0">
+        <div class="row align-items-center ">
+            <div class="col-md-9 text-center text-md-start ">
+                <div class="row">
+                    {% for i in menu %}
+                    {% if i.id != 15 %}
+                    <div class="col-md-3 side-line">
+                        <p class="mb-0"><i class="{{i.icon}} me-3"></i>{{i.name}}</p>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-3 text-center text-md-end">
+                <div class="d-flex ">
+                    {% for i in icon %}
+                    <a class="btn-outline-light btn-social me-2" href="{{i.app_link}}"><i class="{{i.icon}}"></i></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid nav-bar bg-transparent">
     <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
         <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
@@ -13,7 +36,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
-                {% for i in menus %}
+                {% for i in header %}
                 {% if not i.get_sub_menus.count > 0 %}
 
                 <a href="/{{i.app_link}}" class="nav-item nav-link {% if request.resolver_match.url_name == i.slug %}active{% endif%}">{{i.name}}</a>
@@ -41,7 +64,7 @@
                 {% endif %}
                 {% endfor %}
             </div>
-            <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+            {% comment %} <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> {% endcomment %}
         </div>
     </nav>
 </div>
