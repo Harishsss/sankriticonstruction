@@ -19,5 +19,4 @@ __pycache__
 *.sql
 *.zip
 *.bz2 
-/media/*
 !.gitignore
