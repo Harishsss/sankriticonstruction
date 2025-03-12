@@ -68,12 +68,15 @@ class Heading(BaseContent):
     
 class ImagePage(BaseContent):
     name = models.CharField(max_length=100,blank=True, null=True)
+    icon = models.CharField(max_length=100,blank=True, null=True)
     parent = models.ForeignKey('self',on_delete=models.DO_NOTHING, blank=True, null=True)
     order = models.IntegerField(null=True, blank=True)
     image = models.FileField(
         upload_to='section/%y/%m/%d/', blank=True, null=True)
     def __str__(self):
         return self.name
+
+
     
 
 class ContactUs(BaseContent):
@@ -90,6 +93,8 @@ class ContactUs(BaseContent):
         return self.name
 
 class Project(BaseContent):
+    ACTIVE_CHOICES = ((1, 'Ongoing'), (2, 'Completed'), (3, 'Happy Customer'))
+
     name = models.CharField(max_length=100,blank=True, null=True)
     constructions_name = models.CharField(max_length=100,blank=True, null=True)
     rating = models.FloatField(blank=True,null=True)
@@ -99,6 +104,7 @@ class Project(BaseContent):
     bath = models.PositiveIntegerField(blank=True, null=True)
     image = models.ImageField(upload_to='project/%y/%m/%d/', blank=True, null=True)
     address=models.TextField(blank=True, null=True)
+    constructions_status = models.PositiveIntegerField(choices=ACTIVE_CHOICES, default=1)
     order = models.IntegerField(null=True, blank=True)
 
     def __str__(self):

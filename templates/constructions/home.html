@@ -20,46 +20,34 @@
                 {% endfor %}
             </div>
         </div>
-        
     </div>
 </div>
 <!-- Header End -->
 
 
 <!-- Search Start -->
-{% comment %} <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+  <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
     <div class="container">
         <div class="row g-2">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="row g-2">
+                    {% for i  in increments %}
                     <div class="col-md-4">
-                        <input type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
+                        <div class="counter-container">
+                            <div class=" icrement-icon">
+                                <i class="{{i.icon}}"></i>
+                            </div>
+                            <div class="counter" data-target="{{i.count}}"></div>
+                            <div class="elementor-counter-title">{{i.name}}</div>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <select class="form-select border-0 py-3">
-                            <option selected>Property Type</option>
-                            <option value="1">Property Type 1</option>
-                            <option value="2">Property Type 2</option>
-                            <option value="3">Property Type 3</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-select border-0 py-3">
-                            <option selected>Location</option>
-                            <option value="1">Location 1</option>
-                            <option value="2">Location 2</option>
-                            <option value="3">Location 3</option>
-                        </select>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="col-md-2">
-                <button class="btn btn-dark border-0 w-100 py-3">Search</button>
-            </div>
+           
         </div>
     </div>
 </div>
-<!-- Search End --> {% endcomment %}
 
 
 <!-- Category Start -->
@@ -202,13 +190,13 @@
             <div class="col-lg-4 col-md-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
                 <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
                     <li class="nav-item me-2">
-                        <a class="btn btn-outline-primary active" data-bs-toggle="pill" href="#tab-1">ALL PROJECTS</a>
+                        <a class="btn btn-outline-primary {% if not status or status|slugify == '1' %} active{% endif%}" data-bs-toggle="pill" href="/home/?status=1" >ALL PROJECTS</a>
                     </li>
                     <li class="nav-item me-2">
-                        <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-2">COMPLETED</a>
+                        <a class="btn btn-outline-primary {% if status|slugify == '2' %} active {% endif%}" data-bs-toggle="pill" href="/home/?status=2">COMPLETED</a>
                     </li>
                     <li class="nav-item me-0">
-                        <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-3">ONGOING</a>
+                        <a class="btn btn-outline-primary {% if status|slugify == '3' %} active {% endif%}" data-bs-toggle="pill" href="/home/?status=3">ONGOING</a>
                     </li>
                 </ul>
             </div>
@@ -239,7 +227,7 @@
                     {% endfor %}
                     
                     <div class="col-12 text-center">
-                        <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                        <a class="btn btn-primary py-3 px-5" href="/project/?status={{status}}">Browse More Property</a>
                     </div>
                 </div>
             </div>
@@ -351,7 +339,17 @@
 </div>
 <!-- Team End -->
 
-
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">Property Agents</h1>
+            <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+        </div>
+        <iframe width="100%" height="550px"
+        src="https://www.youtube.com/embed/tgbNymZ7vqY">
+        </iframe>
+    </div>
+</div>
 <!-- Testimonial Start -->
 <div class="container-xxl py-5">
     <div class="container">
@@ -387,7 +385,46 @@
     </div>
 </div>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+const counters = document.querySelectorAll(".counter");
+
+counters.forEach((counter) => {
+    counter.innerText = "0";
+    const updateCounter = () => {
+        const target = +counter.getAttribute("data-target");
+        const current = +counter.innerText;
+        const increment = target / 3000; // Adjust speed
+
+        if (current < target) {
+            let formatted = convertToIndianFormat(Math.ceil(current + increment));
+            counter.innerText = formatted
+            setTimeout(updateCounter, 100);
+        } else {
+            let formatted = convertToIndianFormat(target);
+            match = formatted.split(" ")
+            counter.innerText = match[0];
+            counter.nextElementSibling.innerText = target < 9999 ? " "+counter.nextElementSibling.innerText : (match[1] || "") + " "+counter.nextElementSibling.innerText;
+
+        }
+    };
+
+    updateCounter();
+});
+
+
+// Function to convert number to Indian format
+function convertToIndianFormat(num) {
+    if (num >= 10000000) return (num / 10000000).toFixed(1) + " Crores";
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + " Millions";
+    if (num >= 100000) return (num / 100000).toFixed(1) + " Lakhs";
+    if (num >= 1000) return Math.floor(num / 100) * 100 + "+";
+    if (num >= 100) return Math.floor(num / 10) * 10 + "+";
+    if (num >= 10) return Math.floor(num / 10) * 10 + "+";
+    return num.toString();
+}    
+</script>
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
         let element = document.querySelector("#targetElement"); // Replace with your actual element ID or selector
     
         if (element) {
@@ -396,6 +433,16 @@
                 '<span class="text-primary">Perfect Home</span>'
             );
         }
+  
+        let navLinks = document.querySelectorAll(".btn.btn-outline-primary");
+    
+        navLinks.forEach((link) => {
+            link.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent default navigation
+                let targetUrl = this.getAttribute("href"); // Get href attribute
+                window.location.href = targetUrl; // Reload window to href
+            });
+        });
     });
 </script>
 {% endblock %}

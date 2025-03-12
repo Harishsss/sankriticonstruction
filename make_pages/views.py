@@ -1,11 +1,14 @@
 from django.shortcuts import render,redirect
 from make_pages.models import *
-
+from django.db import connection
+from django.db.models import Sum
 # Create your views here.
+
 
 
 def home(request):
     heading="Home"
+    status = request.GET.get('status')
     header_list = Menus.objects.filter(status = 2,)
     header=header_list.filter( parent=None).exclude(id__in=[1,12,16]).order_by("menu_order")
     icon=header_list.filter(parent_id=12).order_by("menu_order")
@@ -16,6 +19,15 @@ def home(request):
     project_headings = Heading.objects.filter(status = 2,slug='project-heading')
     section_image = ImagePage.objects.filter(status = 2,parent_id=20)
     projects = Project.objects.filter(status = 2,)
+    increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
+    increments=[]
+    for  i,j in zip(ImagePage.objects.filter(status = 2,parent_id=60),increment_counts):
+        increments.append({'name':i.name,'icon':i.icon,'count':j})
+    if status == '2':
+        projects=projects.filter(constructions_status__in=[2,3])
+    if status == '3':
+        projects=projects.filter(constructions_status=1)
+    projects=projects[:6]
     return render(request, 'constructions/home.html', locals())
 
     
@@ -26,18 +38,33 @@ def about(request):
     icon=header_list.filter(parent_id=12).order_by("menu_order")
     menu=header_list.filter(parent_id=1).order_by("menu_order")
     map=header_list.filter(id=16).order_by("menu_order")
-
+    projects = Project.objects.filter(status = 2)
+    deliver_projects = Heading.objects.filter(status = 2,parent__id=19)
+    increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
+    increments=[]
+    for  i,j in zip(ImagePage.objects.filter(status = 2,parent_id=60),increment_counts):
+        increments.append({'name':i.name,'icon':i.icon,'count':j})
     return render(request, 'constructions/about.html', locals())
 
 def project(request):
+    status = request.GET.get('status')
+    load = request.GET.get('load','0')
     heading="Project"
     header_list = Menus.objects.filter(status = 2,)
     header=header_list.filter( parent=None).exclude(id__in=[1,12,16]).order_by("menu_order")
     icon=header_list.filter(parent_id=12).order_by("menu_order")
     menu=header_list.filter(parent_id=1).order_by("menu_order")
     map=header_list.filter(id=16).order_by("menu_order")
+    project_headings = Heading.objects.filter(status = 2,slug='project-heading')
     projects = Project.objects.filter(status = 2,)
-
+    increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
+    increments=[]
+    for  i,j in zip(ImagePage.objects.filter(status = 2,parent_id=60),increment_counts):
+        increments.append({'name':i.name,'icon':i.icon,'count':j})
+    if status == '2':
+        projects=projects.filter(constructions_status__in=[2,3])
+    if status == '3':
+        projects=projects.filter(constructions_status=1)
     return render(request, 'constructions/project.html', locals())
 
 def property_list(request):
@@ -47,7 +74,6 @@ def property_list(request):
     icon=header_list.filter(parent_id=12).order_by("menu_order")
     menu=header_list.filter(parent_id=1).order_by("menu_order")
     map=header_list.filter(id=16).order_by("menu_order")
-
     return render(request, 'constructions/property-list.html', locals())
 
 def property_type(request):

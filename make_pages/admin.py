@@ -25,9 +25,9 @@ class HeadingAdmin(ImportExportModelAdmin):
 
 @admin.register(ImagePage)
 class ImagePageAdmin(ImportExportModelAdmin):
-    list_display = ['id','name','parent','image','order',
+    list_display = ['id','name','parent','image','order','icon',
                     'server_modified_on', 'status']
-    fields = ['name','parent','image', 'order', 'status']
+    fields = ['name','parent','image','icon', 'order', 'status']
     search_fields = ['id','name']
     # list_per_page = 15
     list_filter = ['parent__name']
@@ -44,6 +44,6 @@ class ContactUsAdmin(ImportExportModelAdmin):
 
 @admin.register(Project)
 class ProjectAdmin(ImportExportModelAdmin):
-    list_display = ['name','constructions_name','rating','price_of_constructions','bed','sqft','bath','image','address','order','server_modified_on', 'status']
-    fields = ['name','constructions_name','rating','price_of_constructions','bed','sqft','bath','image','address','order', 'status']
+    list_display = ['name','constructions_name','rating','price_of_constructions','bed','sqft','bath','image','address','constructions_status','order','server_modified_on', 'status']
+    fields = ['name','constructions_name','rating','price_of_constructions','bed','sqft','bath','image','address','constructions_status','order', 'status']
     search_fields = ['name']

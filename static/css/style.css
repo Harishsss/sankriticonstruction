@@ -54,7 +54,31 @@
     width: 48px;
     height: 48px;
 }
+.counter-container {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 60px;
+    color: var(--light);
+    text-align: center;
+}
+.elementor-counter-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+}
+.icrement-icon{
+    
+    background: #ffffff;
+    display: inline-table;
+    width: 65px;
+    height: 65px;
+    border: 1px solid var(--light);
+    border-radius: 100%;
+    transition: .3s;
+    color: var(--primary);
+    background-color: #e6f7fd;
 
+}
 .btn-square,
 .btn-sm-square,
 .btn-lg-square {

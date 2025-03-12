@@ -21,6 +21,29 @@
                 </div>
             </div>
         </div>
+        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+            <div class="container">
+                <div class="row g-2">
+                    <div class="col-md-12">
+                        <div class="row g-2">
+                            {% for i  in increments %}
+                            <div class="col-md-4">
+                                <div class="counter-container">
+                                    <div class=" icrement-icon">
+                                        <i class="{{i.icon}}"></i>
+                                    </div>
+                                    <div class="counter" data-target="{{i.count}}"></div>
+                                    <div class="elementor-counter-title">{{i.name}}</div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        
         {% comment %} <!-- Header End -->
 
 
@@ -73,13 +96,13 @@
             <div class="col-lg-4 col-md-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
                 <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
                     <li class="nav-item me-2">
-                        <a class="btn btn-outline-primary active" data-bs-toggle="pill" href="#tab-1">ALL PROJECTS</a>
+                        <a class="btn btn-outline-primary {% if not status or status|slugify == '1' %} active{% endif%}" data-bs-toggle="pill" href="/project/?status=1" >ALL PROJECTS</a>
                     </li>
                     <li class="nav-item me-2">
-                        <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-2">COMPLETED</a>
+                        <a class="btn btn-outline-primary {% if status|slugify == '2' %} active {% endif%}" data-bs-toggle="pill" href="/project/?status=2">COMPLETED</a>
                     </li>
                     <li class="nav-item me-0">
-                        <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-3">ONGOING</a>
+                        <a class="btn btn-outline-primary {% if status|slugify == '3' %} active {% endif%}" data-bs-toggle="pill" href="/project/?status=3">ONGOING</a>
                     </li>
                 </ul>
             </div>
@@ -109,9 +132,9 @@
                     </div>
                     {% endfor %}
                     
-                    <div class="col-12 text-center">
+                    {% comment %} <div class="col-12 text-center">
                         <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
         </div>
@@ -220,6 +243,19 @@
         </div> {% endcomment %}
         <!-- Call to Action End -->
         
-
+        <script>
+            
+            document.addEventListener("DOMContentLoaded", function () {
+                let navLinks = document.querySelectorAll(".btn.btn-outline-primary");
+            
+                navLinks.forEach((link) => {
+                    link.addEventListener("click", function (event) {
+                        event.preventDefault(); // Prevent default navigation
+                        let targetUrl = this.getAttribute("href"); // Get href attribute
+                        window.location.href = targetUrl; // Reload window to href
+                    });
+                });
+            });
+        </script>
 {% endblock %}
   
