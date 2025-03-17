@@ -1,4 +1,16 @@
 {% load static %}
+<style>
+    .logo {
+        text-align: center;
+        font-size: 30px;
+        line-height: 1;
+    }
+    .logo span{
+        color: #bdbfc1;
+        font-size: 16px;
+        display: inherit;
+    }
+</style>
 <div class="container-fluid bg-dark text-white-50 close-header  ">
     <div class="container p-0">
         <div class="row align-items-center ">
@@ -25,15 +37,17 @@
 </div>
 <div class="container-fluid nav-bar bg-transparent">
     <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-        <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+        {% for i in logos %}
+        <a href="/" class="navbar-brand d-flex align-items-center text-center">
             <div class="icon p-2 me-2">
-                <img class="img-fluid" src="{% static 'images/png.png' %}" alt="Icon" style="width: 30px; height: 30px;">
+                <img class="img-fluid" src="/media/{{i.image}}" alt="Icon" style="width: 30px; height: 30px;">
             </div>
-            <h1 class="m-0 text-primary">Sanskriti</h1>
+            <h1 class="m-0 text-primary logo">{{i.name}}<br><span>{{i.icon}}</span></h1>
         </a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
+        {% endfor %}
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
                 {% for i in header %}

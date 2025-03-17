@@ -6,19 +6,25 @@
         <!-- Header Start -->
         <div class="container-fluid header bg-white p-0">
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+                {% for i in section_image %}
                 <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">Property Agent</h1> 
+                    <h1 class="display-5 animated fadeIn mb-4">{{i.name}}</h1> 
                         <nav aria-label="breadcrumb animated fadeIn">
                         <ol class="breadcrumb text-uppercase">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li class="breadcrumb-item text-body active" aria-current="page">Property Agent</li>
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            {% if heading == 'category' %}
+                            <li class="breadcrumb-item"><a href="/project/">Projects</a></li>
+                            {% else %}
+                            <li class="breadcrumb-item"><a href="/category/">Category</a></li>
+                            {% endif %}
+                            <li class="breadcrumb-item text-body active" aria-current="page">{{i.name}}</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="col-md-6 animated fadeIn">
-                    <img class="img-fluid" src="{% static 'images/header.jpg' %}" alt="">
+                    <img class="img-fluid" src="/media/{{i.image}}" alt="">
                 </div>
+                {% endfor %}
             </div>
         </div>
         <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
@@ -242,6 +248,45 @@
             </div>
         </div> {% endcomment %}
         <!-- Call to Action End -->
+        <script>
+            const counters = document.querySelectorAll(".counter");
+            
+            counters.forEach((counter) => {
+                counter.innerText = "0";
+                const updateCounter = () => {
+                    const target = +counter.getAttribute("data-target");
+                    const current = +counter.innerText;
+                    const increment = target / 3000; // Adjust speed
+            
+                    if (current < target) {
+                        let formatted = convertToIndianFormat(Math.ceil(current + increment));
+                        counter.innerText = formatted
+                        setTimeout(updateCounter, 100);
+                    } else {
+                        let formatted = convertToIndianFormat(target);
+                        match = formatted.split(" ")
+                        counter.innerText = match[0];
+                        counter.nextElementSibling.innerText = target < 9999 ? " "+counter.nextElementSibling.innerText : (match[1] || "") + " "+counter.nextElementSibling.innerText;
+            
+                    }
+                };
+            
+                updateCounter();
+            });
+            
+            
+            // Function to convert number to Indian format
+            function convertToIndianFormat(num) {
+                if (num >= 10000000) return (num / 10000000).toFixed(1) + " Crores";
+                if (num >= 1000000) return (num / 1000000).toFixed(1) + " Millions";
+                if (num >= 100000) return (num / 100000).toFixed(1) + " Lakhs";
+                if (num >= 1000) return Math.floor(num / 100) * 100 + "+";
+                if (num >= 100) return Math.floor(num / 10) * 10 + "+";
+                if (num >= 10) return Math.floor(num / 10) * 10 + "+";
+                return num.toString();
+            }    
+            </script>
+
         
         <script>
             

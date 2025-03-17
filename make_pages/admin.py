@@ -47,3 +47,16 @@ class ProjectAdmin(ImportExportModelAdmin):
     list_display = ['name','constructions_name','rating','price_of_constructions','bed','sqft','bath','image','address','constructions_status','order','server_modified_on', 'status']
     fields = ['name','constructions_name','rating','price_of_constructions','bed','sqft','bath','image','address','constructions_status','order', 'status']
     search_fields = ['name']
+
+@admin.register(OngoingProject)
+class OngoingProjectAdmin(ImportExportModelAdmin):
+    list_display = ['name','image','parent','order','server_modified_on', 'status']
+    fields = ['name','image','parent','order', 'status']
+    search_fields = ['parent__name']
+
+
+@admin.register(CategoryVideo)
+class OngoingProjectAdmin(ImportExportModelAdmin):
+    list_display = ['name','video','parent','order','server_modified_on', 'status']
+    fields = ['name','video','parent','order', 'status']
+    search_fields = ['parent__name']

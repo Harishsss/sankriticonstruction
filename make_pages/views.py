@@ -14,14 +14,23 @@ def home(request):
     icon=header_list.filter(parent_id=12).order_by("menu_order")
     menu=header_list.filter(parent_id=1).order_by("menu_order")
     map=header_list.filter(id=16).order_by("menu_order")
-    section_one = Heading.objects.filter(status = 2,slug='owl-1')
-    clients = Heading.objects.filter(status = 2,slug__startswith='client')
-    project_headings = Heading.objects.filter(status = 2,slug='project-heading')
-    section_image = ImagePage.objects.filter(status = 2,parent_id=20)
+    ph =Heading.objects.filter(status = 2)
+    section_one = ph.filter(slug='owl-1')
+    clients = ph.filter(slug__startswith='client')
+    project_headings = ph.filter(slug='project-heading')
+    deliver_projects = ph.exclude(id__in=[69,70])
+    about_paragraph =ph.filter(slug='about_paragraph')
+    video_paragraph = ph.filter(slug='video')
+
+    category=CategoryVideo.objects.filter(status=2,parent_id=78)
+
+    image_page=ImagePage.objects.filter(status = 2)
+    logos = image_page.filter(parent_id=67)
+    section_image = image_page.filter(parent_id=20)
     projects = Project.objects.filter(status = 2,)
     increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
     increments=[]
-    for  i,j in zip(ImagePage.objects.filter(status = 2,parent_id=60),increment_counts):
+    for  i,j in zip(image_page.filter(status = 2,parent_id=60),increment_counts):
         increments.append({'name':i.name,'icon':i.icon,'count':j})
     if status == '2':
         projects=projects.filter(constructions_status__in=[2,3])
@@ -39,10 +48,17 @@ def about(request):
     menu=header_list.filter(parent_id=1).order_by("menu_order")
     map=header_list.filter(id=16).order_by("menu_order")
     projects = Project.objects.filter(status = 2)
-    deliver_projects = Heading.objects.filter(status = 2,parent__id=19)
+    image_page=ImagePage.objects.filter(status = 2)
+    logos = image_page.filter(parent_id=67)
+    about_us = Heading.objects.filter(status = 2,parent__id=19)
+    deliver_projects = about_us.exclude(id__in=[69,70])
+    about_paragraph =about_us.filter(slug='about_paragraph')
+    agent_phs =about_us.filter(slug='agent')
+    section_image = image_page.filter(parent_id=24)
+
     increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
     increments=[]
-    for  i,j in zip(ImagePage.objects.filter(status = 2,parent_id=60),increment_counts):
+    for  i,j in zip(image_page.filter(status = 2,parent_id=60),increment_counts):
         increments.append({'name':i.name,'icon':i.icon,'count':j})
     return render(request, 'constructions/about.html', locals())
 
@@ -55,11 +71,16 @@ def project(request):
     icon=header_list.filter(parent_id=12).order_by("menu_order")
     menu=header_list.filter(parent_id=1).order_by("menu_order")
     map=header_list.filter(id=16).order_by("menu_order")
-    project_headings = Heading.objects.filter(status = 2,slug='project-heading')
+    ph = Heading.objects.filter(status = 2)
+    project_headings=ph.filter(slug='project-heading')
+    
+    image_page=ImagePage.objects.filter(status = 2)
+    logos = image_page.filter(parent_id=67)
     projects = Project.objects.filter(status = 2,)
+    section_image = image_page.filter(parent_id=100)
     increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
     increments=[]
-    for  i,j in zip(ImagePage.objects.filter(status = 2,parent_id=60),increment_counts):
+    for  i,j in zip(image_page.filter(status = 2,parent_id=60),increment_counts):
         increments.append({'name':i.name,'icon':i.icon,'count':j})
     if status == '2':
         projects=projects.filter(constructions_status__in=[2,3])
@@ -67,14 +88,36 @@ def project(request):
         projects=projects.filter(constructions_status=1)
     return render(request, 'constructions/project.html', locals())
 
-def property_list(request):
-    heading="Property agent"
+def category(request):
+    heading="category"
     header_list = Menus.objects.filter(status = 2,)
     header=header_list.filter( parent=None).exclude(id__in=[1,12,16]).order_by("menu_order")
     icon=header_list.filter(parent_id=12).order_by("menu_order")
     menu=header_list.filter(parent_id=1).order_by("menu_order")
     map=header_list.filter(id=16).order_by("menu_order")
-    return render(request, 'constructions/property-list.html', locals())
+    image_page=ImagePage.objects.filter(status = 2)
+    logos = image_page.filter(parent_id=67)
+    projects = Project.objects.filter(status = 2,)
+    proposes = image_page.filter(parent_id=89)
+    ph = Heading.objects.filter(status = 2)
+    our_story=ph.filter(slug='our-story')
+    category_one=ph.filter(slug='category-1')
+    category_two=ph.filter(slug='category-2')
+    category_three=ph.filter(slug='category-3')
+    section_image = image_page.filter(parent_id=98)
+
+    increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
+    increments=[]
+    for  i,j in zip(image_page.filter(status = 2,parent_id=60),increment_counts):
+        increments.append({'name':i.name,'icon':i.icon,'count':j})
+    on_projects = OngoingProject.objects.filter(status=2,parent=None)
+    category=CategoryVideo.objects.filter(status=2)
+    poojas=category.filter(parent_id=79)
+    customers=category.filter(parent_id=86)
+    completed_projects=category.filter(parent_id=83)
+
+    
+    return render(request, 'constructions/category.html', locals())
 
 def property_type(request):
     heading="Property agent"
@@ -83,7 +126,13 @@ def property_type(request):
     icon=header_list.filter(parent_id=12).order_by("menu_order")
     menu=header_list.filter(parent_id=1).order_by("menu_order")
     map=header_list.filter(id=16).order_by("menu_order")
-
+    projects = Project.objects.filter(status = 2,)
+    image_page=ImagePage.objects.filter(status = 2)
+    logos = image_page.filter(parent_id=67)
+    increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
+    increments=[]
+    for  i,j in zip(image_page.filter(status = 2,parent_id=60),increment_counts):
+        increments.append({'name':i.name,'icon':i.icon,'count':j})
     return render(request, 'constructions/property-type.html', locals())
 
 
@@ -94,7 +143,9 @@ def contact(request):
     icon=header_list.filter(parent_id=12).order_by("menu_order")
     menu=header_list.filter(parent_id=1).order_by("menu_order")
     map=header_list.filter(id=16).order_by("menu_order")
-    section_image = ImagePage.objects.filter(status = 2,parent_id=32)
+    image_page=ImagePage.objects.filter(status = 2)
+    logos = image_page.filter(parent_id=67)
+    section_image = image_page.filter(status = 2,parent_id=32)
     section_one = Heading.objects.filter(status = 2,parent_id=26)
 
     if request.method == 'POST':

@@ -7,7 +7,6 @@
   position:relative;
   margin:35px auto;
   perspective:1000;
-  width:450px;
   height:300px;
 }
 .flip{
@@ -69,23 +68,26 @@
   <!-- Header Start -->
   <div class="container-fluid header bg-white p-0">
     <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+      {% for i in section_image %}
+
       <div class="col-md-6 p-5 mt-lg-5">
-        <h1 class="display-5 animated fadeIn mb-4">About Us</h1>
+        <h1 class="display-5 animated fadeIn mb-4">{{i.name}}</h1>
         <nav aria-label="breadcrumb animated fadeIn">
           <ol class="breadcrumb text-uppercase">
-            <li class="breadcrumb-item">
-              <a href="#">Home</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href="#">Pages</a>
-            </li>
-            <li class="breadcrumb-item text-body active" aria-current="page">About</li>
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            {% if heading == 'category' %}
+            <li class="breadcrumb-item"><a href="/project/">Projects</a></li>
+            {% else %}
+            <li class="breadcrumb-item"><a href="/category/">Category</a></li>
+            {% endif %}
+            <li class="breadcrumb-item text-body active" aria-current="page">{{i.name}}</li>
           </ol>
         </nav>
       </div>
       <div class="col-md-6 animated fadeIn">
-        <img class="img-fluid" src="{% static 'images/header.jpg' %}" alt="" />
+        <img class="img-fluid" src="/media/{{i.image}}" alt="">
       </div>
+    {% endfor %}
     </div>
   </div>
   <!-- Header End -->
@@ -118,15 +120,17 @@
   <div class="container-xxl py-5">
     <div class="container">
       <div class="row g-5 align-items-center">
+        {% for i in about_paragraph %}
+
         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
           <div class="about-img position-relative overflow-hidden p-5 pe-0">
-            <img class="img-fluid w-100" src="{% static 'images/about.jpg' %}" />
+            <img class="img-fluid w-100" src="/media/{{i.image}}" />
           </div>
         </div>
         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-          <h1 class="mb-4">#1 Place To Find The Perfect Property</h1>
-          <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-          <p>
+          <h1 class="mb-4">{{i.name}}</h1>
+          <p class="mb-4">{{i.paragraph}}</p>
+          {% comment %} <p>
             <i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita
           </p>
           <p>
@@ -134,9 +138,10 @@
           </p>
           <p>
             <i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet
-          </p>
-          <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
+          </p> {% endcomment %}
+          <a class="btn btn-primary py-3 px-5 mt-3" href="/{{i.btn_link}}">{{i.button}}</a>
         </div>
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -144,9 +149,12 @@
   <div class="container-xxl py-5">
     <div class="container">
       <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-        <h1 class="mb-3">Property Agents</h1>
-        <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+        {% for i in agent_phs %}
+        <h1 class="mb-3">{{i.name}}</h1>
+        <p>{{i.paragraph}}</p>
+        {% endfor %}
       </div>
+      
       <div class="row g-4">
         {% for i in deliver_projects %}
         <div class="col-md-4  wow fadeInUp" data-wow-delay="0.1s">

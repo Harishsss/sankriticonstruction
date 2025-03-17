@@ -110,4 +110,32 @@ class Project(BaseContent):
     def __str__(self):
         return self.name
 
+class OngoingProject(BaseContent):
+    name = models.CharField(max_length=100,blank=True, null=True)
+    image = models.ImageField(upload_to='project/%y/%m/%d/', blank=True, null=True)
+    parent = models.ForeignKey('self',on_delete=models.DO_NOTHING, blank=True, null=True)
+    order = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_on_going(self):
+        # model method to filter menus based parent id
+        return OngoingProject.objects.filter(parent=self,status=2)
+
+class CategoryVideo(BaseContent):
+    name = models.CharField(max_length=100,blank=True, null=True)
+    video = models.URLField(max_length=1010, blank=True, null=True)
+    parent = models.ForeignKey('self',on_delete=models.DO_NOTHING, blank=True, null=True)
+    order = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    
+    
+
+    class Meta:
+        verbose_name_plural = "Category Video"
+
 
