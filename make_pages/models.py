@@ -139,3 +139,16 @@ class CategoryVideo(BaseContent):
         verbose_name_plural = "Category Video"
 
 
+class PropertyAgent(BaseContent):
+    name = models.CharField(max_length=100,blank=True, null=True)
+    designation = models.CharField(max_length=100,blank=True, null=True)
+    link_1 = models.CharField(max_length=512,blank=True, null=True)
+    link_2 = models.CharField(max_length=512,blank=True, null=True)
+    link_3 = models.CharField(max_length=512,blank=True, null=True)
+    image = models.FileField(upload_to='section/%y/%m/%d/', blank=True, null=True)
+    icon_1 = models.CharField(max_length=100,blank=True, null=True)
+    icon_2 = models.CharField(max_length=100,blank=True, null=True)
+    icon_3 = models.CharField(max_length=100,blank=True, null=True)
+    order = models.IntegerField(null=True, blank=True)
+    def __str__(self):
+        return self.name

@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+<style>
+    .on-going .owl-nav {
+        position: absolute;
+        top: 50%;
+        left: 0px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .on-going .owl-nav .owl-prev, .on-going .owl-nav .owl-next {
+        margin: 7px 0;
+        color: #FFFFFF;
+        background: none !important;
+        border-radius: 40px;
+        font-size: 20px;
+        transition: .5s;
+    }
+    .about-img::before {
+        left: 50%;
+    }
+</style>
+
+        <!-- Header Start -->
+        <div class="container-fluid header bg-white p-0">
+            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+                {% for i in section_image %}
+                <div class="col-md-6 p-5 mt-lg-5">
+                    <h1 class="display-5 animated fadeIn mb-4">{{i.name}}</h1> 
+                        <nav aria-label="breadcrumb animated fadeIn">
+                        <ol class="breadcrumb text-uppercase">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            {% if heading == 'category' %}
+                            <li class="breadcrumb-item"><a href="/project/">Projects</a></li>
+                            {% else %}
+                            <li class="breadcrumb-item"><a href="/category/">Category</a></li>
+                            {% endif %}
+                            <li class="breadcrumb-item text-body active" aria-current="page">{{i.name}}</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-md-6 animated fadeIn">
+                    <img class="img-fluid" src="/media/{{i.image}}" alt="">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Header End -->
+<!-- Search Start -->
+<div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+    <div class="container">
+        <div class="row g-2">
+            <div class="col-md-12">
+                <div class="row g-2">
+                    {% for i  in increments %}
+                    <div class="col-md-4">
+                        <div class="counter-container">
+                            <div class=" icrement-icon">
+                                <i class="{{i.icon}}"></i>
+                            </div>
+                            <div class="counter" data-target="{{i.count}}"></div>
+                            <div class="elementor-counter-title">{{i.name}}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+<div class="container-xxl py-5">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        {% for i in our_story %}
+
+       
+        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+          <h1 class="mb-4">{{i.name}}</h1>
+          <p class="mb-4">{{i.paragraph}}</p>
+          {% comment %} <p>
+            <i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita
+          </p>
+          <p>
+            <i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos
+          </p>
+          <p>
+            <i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet
+          </p> {% endcomment %}
+          <a class="btn btn-primary py-3 px-5 mt-3" href="/{{i.btn_link}}">{{i.button}}</a>
+        </div>
+        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+            <div class="about-img position-relative overflow-hidden p-5     ">
+              <img class="img-fluid w-100" src="/media/{{i.image}}" />
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+        <!-- Search End -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    {% for i in category_one %}
+                    <h1 class="mb-3">{{i.name}}</h1>
+                    <p>{{i.paragraph}}</p>
+                    {% endfor %}
+                </div>
+                <div class="row g-4">
+                    {% for i in completed_projects %}
+
+                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <iframe width="100%" height="300px" src="{{i.video}}"> </iframe>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    {% for i in category_two %}
+                    <h1 class="mb-3">{{i.name}}</h1>
+                    <p>{{i.paragraph}}</p>
+                    {% endfor %}
+                </div>
+                <div class="row g-4">
+                    {% for i in customers %}
+                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <iframe width="100%" height="300px" src="{{i.video}}"> </iframe>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    {% for i in category_three %}
+                    <h1 class="mb-3">{{i.name}}</h1>
+                    <p>{{i.paragraph}}</p>
+                    {% endfor %}
+                </div>
+                <div class="row g-4">
+                    {% for i in poojas %}
+
+                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <iframe width="100%" height="300px" src="{{i.video}}"> </iframe>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+   
+        <!-- Property List End -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Property Agents</h1>
+                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                </div>
+                <div class="row g-4">
+                    {% for i in on_projects %}
+
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                       
+                        <div class="team-item rounded overflow-hidden">
+                            <div class="position-relative">
+                                <div class="owl-carousel header-carousel on-going">
+                                    {% for j in i.get_on_going %}
+                                    <div class="owl-carousel-item">
+                                        <img class="img-fluid" src="/media/{{j.image}}" alt="">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="text-center p-4">
+                                <h5 class="fw-bold mb-0">{{i.name}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Property List End -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Proposed Projects</h1>
+                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                </div>
+                <div class="row g-4">
+                    {% for j in proposes %}
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <img class="img-fluid" src="/media/{{j.image}}" alt="">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            const counters = document.querySelectorAll(".counter");
+            
+            counters.forEach((counter) => {
+                counter.innerText = "0";
+                const updateCounter = () => {
+                    const target = +counter.getAttribute("data-target");
+                    const current = +counter.innerText;
+                    const increment = target / 3000; // Adjust speed
+            
+                    if (current < target) {
+                        let formatted = convertToIndianFormat(Math.ceil(current + increment));
+                        counter.innerText = formatted
+                        setTimeout(updateCounter, 100);
+                    } else {
+                        let formatted = convertToIndianFormat(target);
+                        match = formatted.split(" ")
+                        counter.innerText = match[0];
+                        counter.nextElementSibling.innerText = target < 9999 ? " "+counter.nextElementSibling.innerText : (match[1] || "") + " "+counter.nextElementSibling.innerText;
+            
+                    }
+                };
+            
+                updateCounter();
+            });
+            
+            
+            // Function to convert number to Indian format
+            function convertToIndianFormat(num) {
+                if (num >= 10000000) return (num / 10000000).toFixed(1) + " Crores";
+                if (num >= 1000000) return (num / 1000000).toFixed(1) + " Millions";
+                if (num >= 100000) return (num / 100000).toFixed(1) + " Lakhs";
+                if (num >= 1000) return Math.floor(num / 100) * 100 + "+";
+                if (num >= 100) return Math.floor(num / 10) * 10 + "+";
+                if (num >= 10) return Math.floor(num / 10) * 10 + "+";
+                return num.toString();
+            }    
+            </script>
+        {% endblock %}

@@ -50,105 +50,8 @@
 </div>
 
 
-{% comment %} <!-- Category Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h1 class="mb-3">Property Types</h1>
-            <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                    <div class="rounded p-4">
-                        <div class="icon mb-3">
-                            <img class="img-fluid" src="{% static 'images/icon-apartment.png' %}" alt="Icon">
-                        </div>
-                        <h6>Apartment</h6>
-                        <span>123 Properties</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                    <div class="rounded p-4">
-                        <div class="icon mb-3">
-                            <img class="img-fluid" src="{% static 'images/icon-villa.png' %}" alt="Icon">
-                        </div>
-                        <h6>Villa</h6>
-                        <span>123 Properties</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                    <div class="rounded p-4">
-                        <div class="icon mb-3">
-                            <img class="img-fluid" src="{% static 'images/icon-house.png' %}" alt="Icon">
-                        </div>
-                        <h6>Home</h6>
-                        <span>123 Properties</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                    <div class="rounded p-4">
-                        <div class="icon mb-3">
-                            <img class="img-fluid" src="{% static 'images/icon-housing.png' %}" alt="Icon">
-                        </div>
-                        <h6>Office</h6>
-                        <span>123 Properties</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                    <div class="rounded p-4">
-                        <div class="icon mb-3">
-                            <img class="img-fluid" src="{% static 'images/icon-building.png' %}" alt="Icon">
-                        </div>
-                        <h6>Building</h6>
-                        <span>123 Properties</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                    <div class="rounded p-4">
-                        <div class="icon mb-3">
-                            <img class="img-fluid" src="{% static 'images/icon-neighborhood.png' %}" alt="Icon">
-                        </div>
-                        <h6>Townhouse</h6>
-                        <span>123 Properties</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                    <div class="rounded p-4">
-                        <div class="icon mb-3">
-                            <img class="img-fluid" src="{% static 'images/icon-condominium.png' %}" alt="Icon">
-                        </div>
-                        <h6>Shop</h6>
-                        <span>123 Properties</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                    <div class="rounded p-4">
-                        <div class="icon mb-3">
-                            <img class="img-fluid" src="{% static 'images/icon-luxury.png' %}" alt="Icon">
-                        </div>
-                        <h6>Garage</h6>
-                        <span>123 Properties</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div> {% endcomment %}
+ <!-- Category Start -->
+
 <!-- Category End -->
 
   <!-- About Start -->
@@ -181,7 +84,38 @@
     </div>
   </div>
 
-
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        {% for i in agent_phs %}
+        <h1 class="mb-3">{{i.name}}</h1>
+        <p>{{i.paragraph}}</p>
+        {% endfor %}
+      </div>
+      
+      <div class="row g-4">
+        {% for i in deliver_projects %}
+        <div class="col-md-4  wow fadeInUp" data-wow-delay="0.1s">
+          <div class="flipper-container">
+            <div class="flip">
+              <div class="front face text-center">
+                <img src="/media/{{i.image}}" height="300px">
+                {% comment %} <div class="text-img">
+                  <h2>{{i.name}}</h2>
+                  <div class="bdr"></div>
+                </div> {% endcomment %}
+              </div>
+              <div class="back face">
+                <h3>{{i.name}}</h3>
+                <p>{{i.paragraph}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 
 <!-- Property List Start -->
 <div class="container-xxl py-5">
@@ -235,13 +169,40 @@
                     {% endfor %}
                     
                     <div class="col-12 text-center">
-                        <a class="btn btn-primary py-3 px-5" href="/project/?status={{status}}">Browse More Property</a>
+                        <a class="btn btn-primary py-3 px-5" href="/project/?status={{status}}">Browse More Projects</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            {% for i in why_choose_ph %}
+            <h1 class="mb-3">{{i.name}}</h1>
+            <p>{{i.paragraph}}</p>
+            {% endfor %}
+        </div>
+        <div class="row g-4">
+
+            {% for i in why_choose %}
+            <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                <a class="cat-item d-block bg-light text-center rounded p-3 mx-4" href="#">
+                    <div class="rounded p-4 ">
+                        <div class="icon-2 mb-4">
+                            <i class="{{i.icon}}"></i>
+                        </div>
+                        <h6>{{i.name}}</h6>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div> 
+
 <!-- Property List End -->
 
 {% comment %} 
@@ -274,86 +235,42 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            {% for i in video_paragraph %}
+            {% for i in agents %}
             <h1 class="mb-3">{{i.name}}</h1>
             <p>{{i.paragraph}}</p>
             {% endfor %}
         </div>
         <div class="row g-4">
+            {% for i in property_agents %}
             <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="team-item rounded overflow-hidden">
                     <div class="position-relative">
-                        <img class="img-fluid" src="{% static 'images/team-1.jpg' %}" alt="">
+                        <img class="img-fluid" src="/media/{{i.image}}" alt="">
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-square mx-1" href="{{i.link_1}}"><i class="{{i.icon_1}}"></i></a>
+                            <a class="btn btn-square mx-1" href="{{i.link_1}}"><i class="{{i.icon_2}}"></i></a>
+                            <a class="btn btn-square mx-1" href="{{i.link_1}}"><i class="{{i.icon_3}}"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
-                        <h5 class="fw-bold mb-0">Full Name</h5>
-                        <small>Designation</small>
+                        <h5 class="fw-bold mb-0">{{i.name}}</h5>
+                        <small>{{i.designation}}</small>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="team-item rounded overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="{% static 'images/team-2.jpg' %}" alt="">
-                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4 mt-3">
-                        <h5 class="fw-bold mb-0">Full Name</h5>
-                        <small>Designation</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="team-item rounded overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="{% static 'images/team-3.jpg' %}" alt="">
-                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4 mt-3">
-                        <h5 class="fw-bold mb-0">Full Name</h5>
-                        <small>Designation</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="team-item rounded overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="{% static 'images/team-4.jpg' %}" alt="">
-                        <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4 mt-3">
-                        <h5 class="fw-bold mb-0">Full Name</h5>
-                        <small>Designation</small>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
-<!-- Team End -->
 
+<!-- Team End --> 
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h1 class="mb-3">Property Agents</h1>
-            <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+            {% for i in video_paragraph %}
+            <h1 class="mb-3">{{i.name}}</h1>
+            <p>{{i.paragraph}}</p>
+            {% endfor %}
         </div>
         {% for i in category %}
         <iframe width="100%" height="550px"

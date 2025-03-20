@@ -17,7 +17,13 @@
         <div class="col-lg-3 col-md-6">
             <h5 class="text-white mb-4">Quick Links</h5>
             {% for i in header %}
+            {% if not i.get_sub_menus %}
             <a class="btn btn-link text-white-50" href="/{{i.app_link}}">{{i.name}}</a>
+            {% else %}
+            {% for submenus in i.get_sub_menus %}
+            <a class="btn btn-link text-white-50" href="/{{submenus.app_link}}">{{submenus.name}}</a>
+            {% endfor %}
+            {% endif %}
             {% endfor %}
         </div>
         <div class="col-lg-6 col-md-6">
@@ -29,21 +35,11 @@
   </div>
   <div class="container">
       <div class="copyright">
-          <div class="row">
-              <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                  © <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
-    
-    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-    Designed By <a class="border-bottom" href="S">Logavanan</a>
+          <div class="row  ">
+              <div class="mb-3 mb-md-0 ">
+                  © <a class="border-bottom" href="#">SANSKRITI CONSTRUCTIONS</a>, All Right Reserved. Designed By <a class="border-bottom" href="">Logavanan A</a>
               </div>
-              <div class="col-md-6 text-center text-md-end">
-                  <div class="footer-menu">
-                      <a href="">Home</a>
-                      <a href="">Cookies</a>
-                      <a href="">Help</a>
-                      <a href="">FQAs</a>
-                  </div>
-              </div>
+            
           </div>
       </div>
   </div>

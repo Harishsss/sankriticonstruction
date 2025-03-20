@@ -40,7 +40,7 @@
         {% for i in logos %}
         <a href="/" class="navbar-brand d-flex align-items-center text-center">
             <div class="icon p-2 me-2">
-                <img class="img-fluid" src="/media/{{i.image}}" alt="Icon" style="width: 30px; height: 30px;">
+                <img class="img-fluid" src="/media/{{i.image}}" alt="Icon" style="width: 60px; height: 60px;">
             </div>
             <h1 class="m-0 text-primary logo">{{i.name}}<br><span>{{i.icon}}</span></h1>
         </a>
@@ -61,7 +61,7 @@
                     <div class="dropdown-menu rounded-0 m-0">
                         {% for submenus in i.get_sub_menus %}
 
-                            <a href="/{{i.app_link}}" class="dropdown-item">{{i.name}}</a>
+                            <a href="/{{submenus.app_link}}" class="dropdown-item">{{submenus.name}}</a>
                             {% comment %} <a href="property-type.html" class="dropdown-item">Property Type</a>
                         <a href="property-agent.html" class="dropdown-item">Property Agent</a> {% endcomment %}
                         {% endfor %}

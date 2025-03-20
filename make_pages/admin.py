@@ -56,7 +56,14 @@ class OngoingProjectAdmin(ImportExportModelAdmin):
 
 
 @admin.register(CategoryVideo)
-class OngoingProjectAdmin(ImportExportModelAdmin):
+class CategoryVideoAdmin(ImportExportModelAdmin):
     list_display = ['name','video','parent','order','server_modified_on', 'status']
     fields = ['name','video','parent','order', 'status']
     search_fields = ['parent__name']
+
+@admin.register(PropertyAgent)
+class PropertyAgentAdmin(ImportExportModelAdmin):
+    list_display = ['name','designation','link_1','link_2','link_3','image','icon_1','icon_2','icon_3','order','server_modified_on', 'status']
+    fields = ['name','designation','link_1','link_2','link_3','image','icon_1','icon_2','icon_3','order','status']
+    search_fields = ['name']
+
