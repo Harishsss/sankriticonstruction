@@ -188,24 +188,35 @@ def interiors(request):
     map=header_list.filter(id=16).order_by("menu_order")
     image_page=ImagePage.objects.filter(status = 2)
     logos = image_page.filter(parent_id=67)
-    projects = Project.objects.filter(status = 2,).order_by('order')
-    proposes = image_page.filter(parent_id=89).order_by('order')
+    projects = Project.objects.filter(status = 2,)
+    proposes = image_page.filter(parent_id=89)
     ph = Heading.objects.filter(status = 2)
-    our_story=ph.filter(slug='our-story').order_by('order')
+    our_story=ph.filter(slug='our-services').order_by('order')
+    clients = ph.filter(slug__startswith='client').order_by('order')
     category_one=ph.filter(slug='category-1').order_by('order')
     category_two=ph.filter(slug='category-2').order_by('order')
     category_three=ph.filter(slug='category-3').order_by('order')
     section_image = image_page.filter(parent_id=98).order_by('order')
+    our_process_cards = image_page.filter(parent_id=116).order_by('order')
+    associates_logo =image_page.filter(parent_id=128).order_by('order')
 
+    about_us = Heading.objects.filter(status = 2,parent__id=19)
+    deliver_projects = about_us.exclude(id__in=[69,70])
+    about_paragraph =about_us.filter(slug='about_paragraph').order_by('order')
+    agent_phs =about_us.filter(slug='agent').order_by('order')
+    why_choose = image_page.filter(parent_id=106).order_by('order')
+    why_choose_ph=ph.filter(slug='commercial-1').order_by('order')
+    our_process =ph.filter(slug='our-process').order_by('order')
+    associates =ph.filter(slug='associate').order_by('order')
+    
+    agents = ph.filter(slug='agents').order_by('order')
     increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
     increments=[]
     for  i,j in zip(image_page.filter(status = 2,parent_id=60),increment_counts):
         increments.append({'name':i.name,'icon':i.icon,'count':j})
     on_projects = OngoingProject.objects.filter(status=2,parent=None)
     category=CategoryVideo.objects.filter(status=2)
-    poojas=category.filter(parent_id=79).order_by('order')
-    customers=category.filter(parent_id=86).order_by('order')
-    completed_projects=category.filter(parent_id=83).order_by('order')
+    commercial_videos=category.filter(parent_id=122).order_by('order')
     return render(request, 'constructions/interiors.html', locals())
 
 
