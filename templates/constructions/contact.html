@@ -8,19 +8,54 @@
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 {% for i in section_image %}
                 <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">{{i.name}}</h1> 
+                    <div style="margin:auto; width:50%">
 
-                        <nav aria-label="breadcrumb animated fadeIn">
-                        <ol class="breadcrumb text-uppercase">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            {% if heading == 'category' %}
-                            <li class="breadcrumb-item"><a href="/project/">Projects</a></li>
-                            {% else %}
-                            <li class="breadcrumb-item"><a href="/category/">Category</a></li>
-                            {% endif %}
-                            <li class="breadcrumb-item text-body active" aria-current="page">{{i.name}}</li>
-                        </ol>
-                    </nav>
+                        <div>
+                            <h1 class="display-5 animated fadeIn mb-4">{{i.name}}</h1> 
+                        </div>
+                        <div>
+                            <nav aria-label="breadcrumb animated fadeIn">
+                                <ol class="breadcrumb text-uppercase">
+                                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                    {% if heading == 'category' %}
+                                    <li class="breadcrumb-item"><a href="/project/">Projects</a></li>
+                                    {% else %}
+                                    <li class="breadcrumb-item"><a href="/category/">Category</a></li>
+                                    {% endif %}
+                                    <li class="breadcrumb-item text-body active" aria-current="page">{{i.name}}</li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div>
+                            <div class="card shadow-lg mt-5" >
+                                <div class="card-body p-5">
+                                <h5 class="card-title text-center mb-4"><span style="color:#00afef">Get A Quote</span> <br>To Start Your Project</h5>
+                                <form class="row g-3 needs-validation" method="post" novalidate>
+                                    <div>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" pattern="[a-zA-Z ]+" required>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid name.
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid email.
+                                            </div>
+                                    </div>
+                                    <div class="">
+                                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Your Mobile No" pattern="[0-9]{10}" required>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid mobile no.
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <button class="btn btn-primary w-100 " type="submit">Proceed</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6 animated fadeIn">
                     <img class="img-fluid" src="/media/{{i.image}}" alt="">
@@ -30,7 +65,23 @@
         </div>
         <!-- Header End -->
 
-
+        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+            <div class="container">
+                <div class="row g-2">
+                    {% for i  in increments %}
+                    <div class="col-md-4">
+                        <div class="counter-container">
+                            <div class="icrement-icon">
+                                <i class="{{i.icon}}"></i>
+                            </div>
+                            <div class="counter" data-target="{{i.count}}"></div>
+                            <div class="elementor-counter-title">{{i.name}}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
      
         <!-- Search End -->
 
@@ -82,7 +133,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" pattern="[a-zA-Z ]+" required>
                                             <label for="name">Your Name</label>
                                             <div class="invalid-feedback">
                                                 Please provide a valid name.
@@ -139,5 +190,57 @@
 
         <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
         <script src="{% static 'js/pages/form-validation.init.js' %}"></script> 
+        
+       
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let navLinks = document.querySelectorAll(".btn.btn-outline-primary");
+    
+                navLinks.forEach((link) => {
+                    link.addEventListener("click", function (event) {
+                        event.preventDefault(); // Prevent default navigation
+                        let targetUrl = this.getAttribute("href"); // Get href attribute
+                        window.location.href = targetUrl; // Reload window to href
+                    });
+                });
+            })
+
+            const counters = document.querySelectorAll(".counter");
+            
+            counters.forEach((counter) => {
+                counter.innerText = "0";
+                const updateCounter = () => {
+                    const target = +counter.getAttribute("data-target");
+                    const current = +counter.innerText;
+                    const increment = target / 3000; // Adjust speed
+            
+                    if (current < target) {
+                        let formatted = convertToIndianFormat(Math.ceil(current + increment));
+                        counter.innerText = formatted
+                        setTimeout(updateCounter, 100);
+                    } else {
+                        let formatted = convertToIndianFormat(target);
+                        match = formatted.split(" ")
+                        counter.innerText = match[0];
+                        counter.nextElementSibling.innerText = target < 9999 ? " "+counter.nextElementSibling.innerText : (match[1] || "") + " "+counter.nextElementSibling.innerText;
+            
+                    }
+                };
+            
+                updateCounter();
+            });
+            
+            
+            // Function to convert number to Indian format
+            function convertToIndianFormat(num) {
+                if (num >= 10000000) return (num / 10000000).toFixed(1) + " Crores";
+                if (num >= 1000000) return (num / 1000000).toFixed(1) + " Millions";
+                if (num >= 100000) return (num / 100000).toFixed(1) + " Lakhs";
+                if (num >= 1000) return Math.floor(num / 100) * 100 + "+";
+                if (num >= 100) return Math.floor(num / 10) * 10 + "+";
+                if (num >= 10) return Math.floor(num / 10) * 10 + "+";
+                return num.toString();
+            }    
+            </script>
 {% endblock %}
         

@@ -25,9 +25,9 @@ class HeadingAdmin(ImportExportModelAdmin):
 
 @admin.register(ImagePage)
 class ImagePageAdmin(ImportExportModelAdmin):
-    list_display = ['id','name','parent','image','order','icon',
+    list_display = ['id','name','parent','paragraph','image','order','icon',
                     'server_modified_on', 'status']
-    fields = ['name','parent','image','icon', 'order', 'status']
+    fields = ['name','parent','paragraph','image','icon', 'order', 'status']
     search_fields = ['id','name']
     # list_per_page = 15
     list_filter = ['parent__name']

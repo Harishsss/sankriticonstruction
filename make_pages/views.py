@@ -196,17 +196,24 @@ def interiors(request):
     category_one=ph.filter(slug='category-1').order_by('order')
     category_two=ph.filter(slug='category-2').order_by('order')
     category_three=ph.filter(slug='category-3').order_by('order')
+    magnificent =ph.filter(slug='magnificent').order_by('order')
+    our_showrooms =ph.filter(slug='our-showrooms').order_by('order')
+
     section_image = image_page.filter(parent_id=98).order_by('order')
     our_process_cards = image_page.filter(parent_id=116).order_by('order')
+    our_showrooms_cards = image_page.filter(parent_id=151).order_by('order')
+    our_work_cards = image_page.filter(parent_id=157).order_by('order')
     associates_logo =image_page.filter(parent_id=128).order_by('order')
 
     about_us = Heading.objects.filter(status = 2,parent__id=19)
     deliver_projects = about_us.exclude(id__in=[69,70])
     about_paragraph =about_us.filter(slug='about_paragraph').order_by('order')
+
     agent_phs =about_us.filter(slug='agent').order_by('order')
     why_choose = image_page.filter(parent_id=106).order_by('order')
     why_choose_ph=ph.filter(slug='commercial-1').order_by('order')
     our_process =ph.filter(slug='our-process').order_by('order')
+    our_work =ph.filter(slug='our-work').order_by('order')
     associates =ph.filter(slug='associate').order_by('order')
     
     agents = ph.filter(slug='agents').order_by('order')
@@ -239,6 +246,12 @@ def contact(request):
     logos = image_page.filter(parent_id=67).order_by('order')
     section_image = image_page.filter(status = 2,parent_id=32).order_by('order')
     section_one = Heading.objects.filter(status = 2,parent_id=26)
+    projects = Project.objects.filter(status = 2,)
+
+    increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
+    increments=[]
+    for  i,j in zip(image_page.filter(status = 2,parent_id=60),increment_counts):
+        increments.append({'name':i.name,'icon':i.icon,'count':j})
 
     if request.method == 'POST':
         name=request.POST.get('name'),

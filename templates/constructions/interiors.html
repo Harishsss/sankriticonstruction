@@ -32,11 +32,24 @@
         padding: 50px 30px 55px 30px;
         border-radius: 10px;
     }
+    .team-item-3 {
+        box-shadow: 0px 7px 35px rgb(0 0 0 / 45%);
+        transition: .5s;
+        background: #FFFFFF;
+        height: 455px !important;
+        padding: 50px 20px 30px 20px;
+        border-radius: 10px;
+        margin: 0 18px;
+    }
+    .team-item-3 .icon-3{
+        height: 120px;
+        width: 120px;
+    }
     .ib-content{
         margin-top: 25px;
     }
-    .ib-content h6{
-        font-size: 20px;
+    .ib-content h6,  .ib-content p{
+        font-size: 18px;
         font-weight: 400;
         color: #00afef;
     }
@@ -48,6 +61,9 @@
         display: black !important;
 
     }
+    .owl-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled {
+        display: flex                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ;       
+    }
 </style>
 
         <!-- Header Start -->
@@ -56,7 +72,7 @@
                 {% for i in section_image %}
                 <div class="col-md-6 p-5 mt-lg-5">
                     <h1 class="display-5 animated fadeIn mb-4">{{i.name}}</h1> 
-                        <nav aria-label="breadcrumb animated fadeIn">
+                    <nav aria-label="breadcrumb animated fadeIn">
                         <ol class="breadcrumb text-uppercase">
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
                             {% if heading == 'category' %}
@@ -67,6 +83,7 @@
                             <li class="breadcrumb-item text-body active" aria-current="page">{{i.name}}</li>
                         </ol>
                     </nav>
+                   
                 </div>
                 <div class="col-md-6 animated fadeIn">
                     <img class="img-fluid" src="/media/{{i.image}}" alt="">
@@ -210,7 +227,7 @@
 <div class="container-xxl py-5">
     <div class="container">
       <div class="row g-5 align-items-center">
-        {% for i in about_paragraph %}
+        {% for i in magnificent %}
 
         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
           <div class="about-img position-relative overflow-hidden p-5 pe-0">
@@ -230,20 +247,21 @@
   <div class="container-fluid bg-primary mb-5" style="padding: 80px 0px;">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px; color:#FFFFFF">
-            {% for i in our_process %}
-            <h1 class="mb-3" style="color:#FFFFFF">Our Showrooms</h1>
-            <p>Mysore’s only Interior showroom & manufacturing unit located under one roof</p>
+            {% for i in our_showrooms %}
+            <h1 class="mb-3" style="color:#FFFFFF">{{i.name}}</h1>
+            <p>{{i.paragraph}}</p>
             {% endfor %}
         </div>
         <div class="row g-2   justify-content-center align-items-center">
-            {% for i in our_process_cards %}
-            <div class="col-md-2 col-sm-6 wow fadeInUp me-3"  data-wow-delay="0.1s">
-                <div class="team-item-2 rounded text-center overflow-hidden">
+            {% for i in our_showrooms_cards %}
+            <div class="col-md-3 col-sm-6 wow fadeInUp"  data-wow-delay="0.1s">
+                <div class="team-item-3 rounded text-center overflow-hidden">
                     <div class="icon-3">
                         <i class="{{i.icon}}"></i>
                     </div>
                     <div class="ib-content">
                         <h6>{{i.name}}</h6>
+                        <p>{{i.paragraph}}</p>
                     </div>
                 </div>
             </div>
@@ -254,13 +272,13 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            {% for i in associates %}
-            <h1 class="mb-3">Our work</h1>
-            <p>Peek Into Our World!!</p>
+            {% for i in our_work %}
+            <h1 class="mb-3">{{i.name}}</h1>
+            <p>{{i.paragraph}}</p>
             {% endfor %}
         </div>
         <div class="owl-carousel associate-carousel wow fadeInUp" data-wow-delay="0.1s">
-            {% for i in proposes %}
+            {% for i in our_work_cards %}
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded" src="/media/{{i.image}}" >
                 </div>
@@ -273,9 +291,8 @@
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             {% for i in clients %}
             {% if i.id == 41 %}
-
-            <h1 class="mb-3">{{i.name}}</h1>
-            <p>{{i.paragraph}}</p>
+                <h1 class="mb-3">{{i.name}}</h1>
+                <p>{{i.paragraph}}</p>
             {% endif %}
             {% endfor %}
         </div>

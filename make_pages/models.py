@@ -70,6 +70,7 @@ class ImagePage(BaseContent):
     name = models.CharField(max_length=100,blank=True, null=True)
     icon = models.CharField(max_length=100,blank=True, null=True)
     parent = models.ForeignKey('self',on_delete=models.DO_NOTHING, blank=True, null=True)
+    paragraph=models.TextField(blank=True, null=True)
     order = models.IntegerField(null=True, blank=True)
     image = models.FileField(
         upload_to='section/%y/%m/%d/', blank=True, null=True)
