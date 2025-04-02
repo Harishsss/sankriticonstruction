@@ -116,6 +116,8 @@ def residential(request):
     category_one=ph.filter(slug='category-1')
     category_two=ph.filter(slug='category-2')
     category_three=ph.filter(slug='category-3')
+    category_fore=ph.filter(slug='category-4')
+    category_five=ph.filter(slug='category-5')
     section_image = image_page.filter(id=99)
 
     
