@@ -59,10 +59,10 @@
                         <nav aria-label="breadcrumb animated fadeIn">
                         <ol class="breadcrumb text-uppercase">
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            {% if heading == 'category' %}
+                            {% if heading in 'commercial,residential,interiors' %}
                             <li class="breadcrumb-item"><a href="/project/">Projects</a></li>
                             {% else %}
-                            <li class="breadcrumb-item"><a href="/category/">Category</a></li>
+                            <li class="breadcrumb-item"><a href="/about/">About US</a></li>
                             {% endif %}
                             <li class="breadcrumb-item text-body active" aria-current="page">{{i.name}}</li>
                         </ol>

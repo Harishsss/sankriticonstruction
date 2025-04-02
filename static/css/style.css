@@ -5,14 +5,15 @@
     --light: #e6f7fd;
     --dark: #0E2E50;
 }
-
-.back-to-top {
+.back-to-top, .back-to-bottom {
     position: fixed;
+    right: 20px;
     display: none;
-    right: 45px;
-    bottom: 45px;
-    z-index: 99;
+    z-index: 1000;
+    margin: 5px;
 }
+.back-to-top { bottom: 60px; } /* Positioning Top Button */
+.back-to-bottom { bottom: 10px; } /* P
 
 
 /*** Spinner ***/

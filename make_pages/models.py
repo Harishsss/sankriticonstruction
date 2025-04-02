@@ -15,6 +15,10 @@ class BaseContent(models.Model):
     modified_by = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, related_name='modified%(app_label)s_%(class)s_related', null=True, blank=True,)
 
+    # class Meta:
+    #     abstract = True
+
+
 class Menus(BaseContent):
     #-------------------#
     # Menus module
@@ -151,5 +155,14 @@ class PropertyAgent(BaseContent):
     icon_2 = models.CharField(max_length=100,blank=True, null=True)
     icon_3 = models.CharField(max_length=100,blank=True, null=True)
     order = models.IntegerField(null=True, blank=True)
+    def __str__(self):
+        return self.name
+
+
+class StartProject(BaseContent):
+    name = models.CharField(max_length=100,blank=True, null=True)
+    gmail = models.CharField(max_length=100,blank=True, null=True)
+    phone = models.CharField(max_length=10,blank=True, null=True)
+
     def __str__(self):
         return self.name

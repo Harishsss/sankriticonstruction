@@ -67,3 +67,10 @@ class PropertyAgentAdmin(ImportExportModelAdmin):
     fields = ['name','designation','link_1','link_2','link_3','image','icon_1','icon_2','icon_3','order','status']
     search_fields = ['name']
 
+
+@admin.register(StartProject)
+class StartProjectAdmin(ImportExportModelAdmin):
+    list_display = ['id','name','gmail','phone',
+                    'server_modified_on', 'status']
+    fields = ['name','gmail', 'phone','status']
+    search_fields = ['id','name']

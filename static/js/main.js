@@ -33,12 +33,23 @@
         } else {
             $('.back-to-top').fadeOut('slow');
         }
+
+        if ($(this).scrollTop() + $(this).height() < $(document).height() - 300) {
+            $('.back-to-bottom').fadeIn('slow');
+        } else {
+            $('.back-to-bottom').fadeOut('slow');
+        }
     });
+
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
 
+    $('.back-to-bottom').click(function () {
+        $('html, body').animate({ scrollTop: $(document).height() }, 1500, 'easeInOutExpo');
+        return false;
+    });
     $(".header-carousel").owlCarousel({
         autoplay: true,
         smartSpeed: 1500,

@@ -11,7 +11,6 @@ urlpatterns = [
     path('commercial/', commercial, name="commercial"),
     path('interiors/', interiors, name="interiors"),
     path('contact/', contact, name="contact"),
-    path('testimonial/', testimonial, name="testimonial"),
-    path('error_404/', error_page, name="error_404")
+
 ]
 

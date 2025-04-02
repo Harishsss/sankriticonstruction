@@ -116,7 +116,7 @@ def residential(request):
     category_one=ph.filter(slug='category-1')
     category_two=ph.filter(slug='category-2')
     category_three=ph.filter(slug='category-3')
-    section_image = image_page.filter(parent_id=98)
+    section_image = image_page.filter(id=99)
 
     
     increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
@@ -150,7 +150,7 @@ def commercial(request):
     category_one=ph.filter(slug='category-1').order_by('order')
     category_two=ph.filter(slug='category-2').order_by('order')
     category_three=ph.filter(slug='category-3').order_by('order')
-    section_image = image_page.filter(parent_id=98).order_by('order')
+    section_image = image_page.filter(id=166).order_by('order')
     our_process_cards = image_page.filter(parent_id=116).order_by('order')
     associates_logo =image_page.filter(parent_id=128).order_by('order')
 
@@ -199,7 +199,7 @@ def interiors(request):
     magnificent =ph.filter(slug='magnificent').order_by('order')
     our_showrooms =ph.filter(slug='our-showrooms').order_by('order')
 
-    section_image = image_page.filter(parent_id=98).order_by('order')
+    section_image = image_page.filter(id=167).order_by('order')
     our_process_cards = image_page.filter(parent_id=116).order_by('order')
     our_showrooms_cards = image_page.filter(parent_id=151).order_by('order')
     our_work_cards = image_page.filter(parent_id=157).order_by('order')
@@ -252,41 +252,30 @@ def contact(request):
     increments=[]
     for  i,j in zip(image_page.filter(status = 2,parent_id=60),increment_counts):
         increments.append({'name':i.name,'icon':i.icon,'count':j})
-
     if request.method == 'POST':
-        name=request.POST.get('name'),
-        gmail_id=request.POST.get('email'),
-        subject=request.POST.get('subject'),
-        message=request.POST.get('message'),
-        contact_obj =ContactUs.objects.create(
-        name=name,
-        gmail=gmail_id,
-        subject=subject,
-        message=message,
+        name=request.POST.get('name')
+        gmail_id=request.POST.get('email')
         phone=request.POST.get('phone')
-        )
-        contact_obj.save()
-        # send_test_email(gmail_id,subject,message)
+        cust_id=request.POST.get('cust_id')
+        if cust_id == "1":
+            start_project_obj =StartProject.objects.create(
+            name=name,
+            gmail=gmail_id,
+            phone=phone
+            )
+            start_project_obj.save()
+        elif cust_id == "2":
+            subject=request.POST.get('subject')
+            message=request.POST.get('message')
+            contact_obj =ContactUs.objects.create(
+            name=name,
+            gmail=gmail_id,
+            subject=subject,
+            message=message ,
+            phone=phone
+            )
+            contact_obj.save()
         return redirect('/contact/')
     return render(request, 'constructions/contact.html', locals())
 
 
-def testimonial(request):
-    header_list = Menus.objects.filter(status = 2,)
-    header=header_list.filter( parent=None).exclude(id__in=[1,12,16]).order_by("menu_order")
-    icon=header_list.filter(parent_id=12).order_by("menu_order")
-    menu=header_list.filter(parent_id=1).order_by("menu_order")
-    map=header_list.filter(id=16).order_by("menu_order")
-
-    heading="Testimonial"
-    return render(request, 'constructions/testimonial.html', locals())
-
-def error_page(request):
-    heading="404"
-    header_list = Menus.objects.filter(status = 2,)
-    header=header_list.filter( parent=None).exclude(id__in=[1,12,16]).order_by("menu_order")
-    icon=header_list.filter(parent_id=12).order_by("menu_order")
-    menu=header_list.filter(parent_id=1).order_by("menu_order")
-    map=header_list.filter(id=16).order_by("menu_order")
-
-    return render(request, 'constructions/404.html', locals())

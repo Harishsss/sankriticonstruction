@@ -17,41 +17,46 @@
                             <nav aria-label="breadcrumb animated fadeIn">
                                 <ol class="breadcrumb text-uppercase">
                                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                    {% if heading == 'category' %}
-                                    <li class="breadcrumb-item"><a href="/project/">Projects</a></li>
-                                    {% else %}
-                                    <li class="breadcrumb-item"><a href="/category/">Category</a></li>
-                                    {% endif %}
-                                    <li class="breadcrumb-item text-body active" aria-current="page">{{i.name}}</li>
+                                    {% if heading in 'commercial,residential,interiors' %}
+                            <li class="breadcrumb-item"><a href="/project/">Projects</a></li>
+                            {% else %}
+                            <li class="breadcrumb-item"><a href="/about/">About US</a></li>
+                            {% endif %}
+                            <li class="breadcrumb-item text-body active" aria-current="page">{{i.name}}</li>
                                 </ol>
                             </nav>
                         </div>
                         <div>
                             <div class="card shadow-lg mt-5" >
                                 <div class="card-body p-5">
-                                <h5 class="card-title text-center mb-4"><span style="color:#00afef">Get A Quote</span> <br>To Start Your Project</h5>
-                                <form class="row g-3 needs-validation" method="post" novalidate>
-                                    <div>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" pattern="[a-zA-Z ]+" required>
-                                        <div class="invalid-feedback">
-                                            Please provide a valid name.
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
-                                        <div class="invalid-feedback">
-                                            Please provide a valid email.
+                                    <h5 class="card-title text-center mb-4"><span style="color:#00afef">Get A Quote</span> <br>To Start Your Project</h5>
+                                    <form class="row g-3 needs-validation" method="post" novalidate>
+                                        {% csrf_token %}
+
+                                        <input type="hidden" class="form-control" id="cust_id" name="cust_id" value="1" required>
+
+                                        <div>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" pattern="[a-zA-Z ]+" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid name.
                                             </div>
-                                    </div>
-                                    <div class="">
-                                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Your Mobile No" pattern="[0-9]{10}" required>
-                                        <div class="invalid-feedback">
-                                            Please provide a valid mobile no.
                                         </div>
-                                    </div>
-                                    <div class="">
-                                        <button class="btn btn-primary w-100 " type="submit">Proceed</button>
-                                    </div>
+                                        <div class="">
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid email.
+                                                </div>
+                                        </div>
+                                        <div class="">
+                                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Your Mobile No" pattern="[0-9]{10}" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid mobile no.
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <button class="btn btn-primary w-100 " type="submit">Proceed</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -126,9 +131,10 @@
                     </div>
                     <div class="col-md-6">
                         <div class="wow fadeInUp" data-wow-delay="0.5s">
-                            <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+                            <p class="mb-4">We value your questions, feedback, and project inquiries. Reach out to us, and our team will be happy to assist you.</p>
                             <form method="POST" class="needs-validation" autocomplete="off" novalidate>
                                 {% csrf_token %}
+                                <input type="hidden" class="form-control" id="cust_id" name="cust_id" value="2" required>
 
                                 <div class="row g-3">
                                     <div class="col-md-6">
