@@ -74,3 +74,10 @@ class StartProjectAdmin(ImportExportModelAdmin):
                     'server_modified_on', 'status']
     fields = ['name','gmail', 'phone','status']
     search_fields = ['id','name']
+
+@admin.register(Career)
+class CareerAdmin(ImportExportModelAdmin):
+    list_display = ['id','name','gmail','role','phone','message','experience',
+                    'server_modified_on', 'status']
+    fields = ['name','gmail','role', 'phone','message','experience','cv','status']
+    search_fields = ['id','name']

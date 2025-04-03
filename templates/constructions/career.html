@@ -81,27 +81,18 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        {% for i in map %}
-
-                        <iframe class="position-relative rounded w-100 h-100"
-                            src="{{i.app_link}}"
-                            frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
-                            tabindex="0"></iframe>
-                        {% endfor %}
-                    </div>
-                    <div class="col-md-6">
+                    
+                    <div class="col-md-12">
                         <div class="wow fadeInUp" data-wow-delay="0.5s">
                             <p class="mb-4">We value your questions, feedback, and project inquiries. Reach out to us, and our team will be happy to assist you.</p>
-                            <form method="POST" class="needs-validation" autocomplete="off" novalidate>
+                            <form method="POST" class="needs-validation" enctype="multipart/form-data" autocomplete="off" novalidate>
                                 {% csrf_token %}
-                                <input type="hidden" class="form-control" id="cust_id" name="cust_id" value="2" required>
 
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" pattern="[a-zA-Z ]+" required>
-                                            <label for="name">Your Name</label>
+                                            <label for="name">Your Name <span style="color:red">*</span></label>
                                             <div class="invalid-feedback">
                                                 Please provide a valid name.
                                               </div>
@@ -110,7 +101,7 @@
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
-                                            <label for="email">Your Email</label>
+                                            <label for="email">Your Email <span style="color:red">*</span></label>
                                             <div class="invalid-feedback">
                                                 Please provide a valid email.
                                               </div>
@@ -119,18 +110,36 @@
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="phone" name="phone" placeholder="Your Mobile No" pattern="[0-9]{10}" required>
-                                            <label for="phone">Your Mobile No</label>
+                                            <label for="phone">Your Mobile No <span style="color:red">*</span></label>
                                             <div class="invalid-feedback">
                                                 Please provide a valid mobile no.
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
-                                            <label for="subject">Subject</label>
+                                            <input type="text" class="form-control" id="role" name="role" placeholder="role" required>
+                                            <label for="role">Role <span style="color:red">*</span></label>
                                             <div class="invalid-feedback">
-                                                Please provide a valid subject.
+                                                Please provide a valid role.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="experience" name="experience" placeholder="experience" required>
+                                            <label for="experience">Total Experience <span style="color:red">*</span></label>
+                                            <div class="invalid-feedback">
+                                                Please provide a Total Experience.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="file" class="form-control" id="resume" name="resume" placeholder="resume" required>
+                                            <label for="resume">Upload CV<span style="color:red">*</span></label>
+                                            <div class="invalid-feedback">
+                                                Please upload a CV.
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +153,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                        <button class="btn btn-primary w-100 py-3" type="submit">Sumbit Your profile</button>
                                     </div>
                                 </div>
                             </form>

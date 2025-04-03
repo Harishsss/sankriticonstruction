@@ -271,26 +271,58 @@ def contact(request):
         name=request.POST.get('name')
         gmail_id=request.POST.get('email')
         phone=request.POST.get('phone')
-        cust_id=request.POST.get('cust_id')
-        if cust_id == "1":
-            start_project_obj =StartProject.objects.create(
-            name=name,
-            gmail=gmail_id,
-            phone=phone
-            )
-            start_project_obj.save()
-        elif cust_id == "2":
-            subject=request.POST.get('subject')
-            message=request.POST.get('message')
-            contact_obj =ContactUs.objects.create(
-            name=name,
-            gmail=gmail_id,
-            subject=subject,
-            message=message ,
-            phone=phone
-            )
-            contact_obj.save()
+       
+        subject=request.POST.get('subject')
+        message=request.POST.get('message')
+        contact_obj =ContactUs.objects.create(
+        name=name,
+        gmail=gmail_id,
+        subject=subject,
+        message=message or None,
+        phone=phone
+        )
+        contact_obj.save()
         return redirect('/contact/')
     return render(request, 'constructions/contact.html', locals())
 
 
+def career(request):
+    heading="Career"
+    header_list = Menus.objects.filter(status = 2,)
+    header=header_list.filter( parent=None).exclude(id__in=[1,12,16]).order_by("menu_order")
+    icon=header_list.filter(parent_id=12).order_by("menu_order")
+    menu=header_list.filter(parent_id=1).order_by("menu_order")
+    map=header_list.filter(id=16).order_by("menu_order")
+    image_page=ImagePage.objects.filter(status = 2)
+    logos = image_page.filter(parent_id=67).order_by('order')
+    section_image = image_page.filter(status = 2,id=172).order_by('order')
+    section_one = Heading.objects.filter(status = 2,id=173)
+    projects = Project.objects.filter(status = 2,)
+
+    increment_counts = [projects.filter(constructions_status__in=[2,3]).count(),projects.filter(constructions_status=3).count(),projects.aggregate(Sum('sqft')).get('sqft__sum')]
+    increments=[]
+    for  i,j in zip(image_page.filter(status = 2,parent_id=60),increment_counts):
+        increments.append({'name':i.name,'icon':i.icon,'count':j})
+    if request.method == 'POST':
+        name=request.POST.get('name')
+        gmail_id=request.POST.get('email')
+        phone=request.POST.get('phone')
+       
+        role=request.POST.get('role')
+        experience=request.POST.get('experience')
+        message=request.POST.get('message')
+        cv = request.FILES['resume']
+        career_obj =Career.objects.create(
+        name=name,
+        gmail=gmail_id,
+        role=role,
+        experience=experience,
+        message=message or None,
+        phone=phone
+        )
+        career_obj.save()
+        career_obj.cv=cv
+        career_obj.save()
+        return redirect('/contact/')
+    return render(request, 'constructions/career.html', locals())
+    
