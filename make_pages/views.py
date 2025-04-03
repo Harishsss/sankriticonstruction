@@ -48,6 +48,17 @@ def home(request):
     if status == '3':
         projects=projects.filter(constructions_status=1).order_by('order')
     projects=projects[:6]
+
+    if request.method == 'POST':
+        name=request.POST.get('name')
+        gmail_id=request.POST.get('email')
+        phone=request.POST.get('phone')
+        start_project_obj =StartProject.objects.create(
+        name=name,
+        gmail=gmail_id,
+        phone=phone
+        )
+        start_project_obj.save()
     return render(request, 'constructions/home.html', locals())
 
     
@@ -148,6 +159,8 @@ def commercial(request):
     projects = Project.objects.filter(status = 2,)
     proposes = image_page.filter(parent_id=89)
     ph = Heading.objects.filter(status = 2)
+    project_headings=ph.filter(slug='project-heading')
+
     our_story=ph.filter(slug='our-services').order_by('order')
     category_one=ph.filter(slug='category-1').order_by('order')
     category_two=ph.filter(slug='category-2').order_by('order')

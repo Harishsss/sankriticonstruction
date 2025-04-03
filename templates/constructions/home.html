@@ -6,9 +6,46 @@
     <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
         {% for i in section_one %}
         <div class="col-md-6 p-5 mt-lg-5">
-            <h1 class="display-5 animated fadeIn mb-4 " id="targetElement">{{i.name}}</h1>
-            <p class="animated fadeIn mb-4 pb-2">{{i.paragraph}}</p>
-            <a href="{{i.btn_link}}" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">{{i.button}}</a>
+            <div>
+                <h1 class="display-5 animated fadeIn mb-4 " id="targetElement">{{i.name}}</h1>
+                <p class="animated fadeIn mb-4 pb-2">{{i.paragraph}}</p>
+                <a href="{{i.btn_link}}" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">{{i.button}}</a>
+            </div>
+            <div class="get-quote">
+            <div>
+                <div class="card shadow-lg mt-5" >
+                    <div class="card-body p-5">
+                        <h5 class="card-title text-center mb-4"><span style="color:#00afef">Get A Quote</span> <br>To Start Your Project</h5>
+                        <form class="row g-3 needs-validation" method="post" novalidate>
+                            {% csrf_token %}
+
+
+                            <div>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" pattern="[a-zA-Z ]+" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid name.
+                                </div>
+                            </div>
+                            <div class="">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid email.
+                                    </div>
+                            </div>
+                            <div class="">
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Your Mobile No" pattern="[0-9]{10}" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid mobile no.
+                                </div>
+                            </div>
+                            <div class="">
+                                <button class="btn btn-primary w-100 " type="submit">Proceed</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
         </div>
         {% endfor %}
         <div class="col-md-6 animated fadeIn">
@@ -26,7 +63,7 @@
 
 
 <!-- Search Start -->
-  <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+  <div class="container-fluid bg-primary mb-md-5 mb-2 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
     <div class="container">
         <div class="row g-2">
             <div class="col-md-12">
@@ -86,7 +123,7 @@
 
   <div class="container-xxl py-5">
     <div class="container">
-      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+      <div class="text-center mx-auto mb-md-5 mb-2 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
         {% for i in agent_phs %}
         <h1 class="mb-3">{{i.name}}</h1>
         <p>{{i.paragraph}}</p>
@@ -121,16 +158,16 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-0 gx-5 align-items-end">
-            <div class="col-lg-8 col-md-6">
+            <div class="col-lg-7 col-md-6">
                 {% for i in project_headings %}
-                <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+                <div class="text-start mx-auto mb-md-5 mb-2 wow slideInLeft" data-wow-delay="0.1s">
                     <h1 class="mb-3">{{i.name}}</h1>
                     <p>{{i.paragraph}}</p>
                 </div>
                 {% endfor %}
             </div>
-            <div class="col-lg-4 col-md-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
-                <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+            <div class="col-lg-5 col-md-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                <ul class="nav nav-pills d-inline-flex justify-content-end mb-md-5 mb-2">
                     <li class="nav-item me-2">
                         <a class="btn btn-outline-primary {% if not status or status|slugify == '1' %} active{% endif%}" data-bs-toggle="pill" href="/home/?status=1" >ALL PROJECTS</a>
                     </li>
@@ -179,7 +216,7 @@
 
 <div class="container-xxl py-5">
     <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <div class="text-center mx-auto mb-md-5 mb-2 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             {% for i in why_choose_ph %}
             <h1 class="mb-3">{{i.name}}</h1>
             <p>{{i.paragraph}}</p>
@@ -234,7 +271,7 @@
 <!-- Team Start -->
 <div class="container-xxl py-5">
     <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <div class="text-center mx-auto mb-md-5 mb-2 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             {% for i in agents %}
             <h1 class="mb-3">{{i.name}}</h1>
             <p>{{i.paragraph}}</p>
@@ -266,7 +303,7 @@
 <!-- Team End --> 
 <div class="container-xxl py-5">
     <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <div class="text-center mx-auto mb-md-5 mb-2 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             {% for i in video_paragraph %}
             <h1 class="mb-3">{{i.name}}</h1>
             <p>{{i.paragraph}}</p>
@@ -282,7 +319,7 @@
 <!-- Testimonial Start -->
 <div class="container-xxl py-5">
     <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <div class="text-center mx-auto mb-md-5 mb-2 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             {% for i in clients %}
             {% if i.id == 41 %}
 

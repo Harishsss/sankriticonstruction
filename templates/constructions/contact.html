@@ -8,7 +8,7 @@
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 {% for i in section_image %}
                 <div class="col-md-6 p-5 mt-lg-5">
-                    <div style="margin:auto; width:50%">
+                    <div class="get-quote">
 
                         <div>
                             <h1 class="display-5 animated fadeIn mb-4">{{i.name}}</h1> 
@@ -70,7 +70,7 @@
         </div>
         <!-- Header End -->
 
-        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+        <div class="container-fluid bg-primary mb-md-5 mb-2 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
             <div class="container">
                 <div class="row g-2">
                     {% for i  in increments %}
@@ -94,7 +94,7 @@
         <!-- Contact Start -->
         <div class="container-xxl py-5">
             <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <div class="text-center mx-auto mb-md-5 mb-2 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                     {% for i in section_one %}
                     <h1 class="mb-3">{{i.name}}</h1>
                     <p>{{i.paragraph}}</p>
