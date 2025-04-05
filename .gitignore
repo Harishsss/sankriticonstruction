@@ -20,3 +20,4 @@ __pycache__
 *.zip
 *.bz2 
 !.gitignore
+*.sqlite3

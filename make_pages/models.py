@@ -177,7 +177,7 @@ class Career(BaseContent):
     experience = models.CharField(max_length=100,blank=True, null=True)
     cv = models.FileField(
         upload_to='cv/%y/%m/%d/', blank=True, null=True)
-    feedback=models.TextField(blank=True, null=True)
+    message=models.TextField(blank=True, null=True)
 
   
 
