@@ -91,7 +91,7 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-0 gx-5 align-items-end">
-            <div class="col-lg-7 col-md-6">
+            <div class="col-md-6">
                 {% for i in project_headings %}
                 <div class="text-start mx-auto mb-md-5 mb-2 wow slideInLeft" data-wow-delay="0.1s">
                     <h1 class="mb-3">{{i.name}}</h1>
@@ -99,7 +99,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <div class="col-lg-5 col-md-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+            <div class="col-md-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
                 <ul class="nav nav-pills d-inline-flex justify-content-end mb-md-5 mb-2">
                     <li class="nav-item me-2">
                         <a class="btn btn-outline-primary {% if not status or status|slugify == '1' %} active{% endif%}" data-bs-toggle="pill" href="/project/?status=1" >ALL PROJECTS</a>

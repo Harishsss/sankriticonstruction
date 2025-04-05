@@ -2,18 +2,36 @@
 {% load static %}
 {% block contents %}
 
+<style>
+    @media screen and (max-width: 1280px) {
+        .display-5{
+            font-size: 2rem;
+        }
+    }
+    @media screen and (max-width: 1024px) {
+        .display-5{
+            font-size: 1.5rem;
+        }
+    }
+    @media screen and (max-width: 976px) {
+        .display-5{
+            font-size: 1rem;
+        }
+    }
+</style>
+
 <div class="container-fluid header bg-white p-0">
-    <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+    <div class="row g-0 align-items-center flex-column-reverse flex-md-row section-1">
         {% for i in section_one %}
-        <div class="col-md-6 p-5 mt-lg-5">
+        <div class="col-md-6 px-lg-5 p-2">
             <div>
-                <h1 class="display-5 animated fadeIn mb-4 " id="targetElement">{{i.name}}</h1>
+                <h1 class="display-5 animated fadeIn" id="targetElement">{{i.name}}</h1>
                 
             </div>
             <div class="get-quote">
             <div>
-                <div class="card shadow-lg mt-5" >
-                    <div class="card-body p-5">
+                <div class="card shadow-lg mt-3" >
+                    <div class="card-body p-md-5  p-3">
                         <h5 class="card-title text-center mb-4"><span style="color:#00afef">Get A Quote</span> <br>To Start Your Project</h5>
                         <form class="row g-3 needs-validation" method="post" novalidate>
                             {% csrf_token %}
@@ -131,7 +149,7 @@
       
       <div class="row g-4">
         {% for i in deliver_projects %}
-        <div class="col-md-4  wow fadeInUp" data-wow-delay="0.1s">
+        <div class="col-lg-4  wow fadeInUp" data-wow-delay="0.1s">
           <div class="flipper-container">
             <div class="flip">
               <div class="front face text-center">
@@ -157,7 +175,7 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-0 gx-5 align-items-end">
-            <div class="col-lg-7 col-md-6">
+            <div class="col-md-6">
                 {% for i in project_headings %}
                 <div class="text-start mx-auto mb-md-5 mb-2 wow slideInLeft" data-wow-delay="0.1s">
                     <h1 class="mb-3">{{i.name}}</h1>
@@ -165,7 +183,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <div class="col-lg-5 col-md-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+            <div class="col-md-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
                 <ul class="nav nav-pills d-inline-flex justify-content-end mb-md-5 mb-2">
                     <li class="nav-item me-2">
                         <a class="btn btn-outline-primary {% if not status or status|slugify == '1' %} active{% endif%}" data-bs-toggle="pill" href="/home/?status=1" >ALL PROJECTS</a>

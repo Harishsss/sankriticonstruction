@@ -14,15 +14,31 @@
         margin: auto;
         width: 50%;
     }
-    @media screen and (max-width: 600px) {
-        .close-header{
-            display: none;
-
+    .section-1{
+        margin-top: 10vh;
+      }
+    
+   
+   
+    @media screen and (max-width: 1280px) {
+        .get-quote{
+            margin: none;
+            width: 100%;
         }
+        .section-1{
+            margin-top: 10vh;
+          }
+       
     }
-    @media screen and (max-width: 992px) {
-        .b-hdr{
+    @media screen and (max-width: 1024px) {
+        .section-1{
+            margin-top: 20vh;
+          }
+    }
+    @media screen and (max-width: 976px) {
 
+        .b-hdr{
+    
             border-bottom: 1px solid rgba(255, 255, 255, .1);
         }
         .side-line{
@@ -34,12 +50,19 @@
         .btn {
             font-size: 0.8rem;
         }
-        .get-quote{
-            margin: none;
-            width: 100%;
-        }
+        .section-1{
+            margin-top: 0vh;
+          }
     }
-    
+    @media screen and (max-width: 600px) {
+        .close-header{
+            display: none;
+
+        }
+        .section-1{
+            margin-top: 0vh;
+          }
+    }
 </style>
 <div class="container-fluid bg-dark text-white-50 close-header  ">
     <div class="row align-items-center">
